@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="CompanyName.ApplicationName.Views.FeedbackView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="clr-namespace:CompanyName.ApplicationName.Views.Controls">
+    <Border BorderBrush="{StaticResource PacktBlack}" BorderThickness="1" CornerRadius="3">
+        <Grid Height="500">
+            <Controls:FeedbackControl Feedback="{Binding FeedbackManager.Feedback}" VerticalAlignment="Top" HorizontalAlignment="Stretch" Width="600" Margin="80,0" />
+            <StackPanel TextElement.FontSize="14" VerticalAlignment="Center" Margin="20">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="28" Margin="0,0,0,10">
+                    <TextBox Text="{Binding FeedbackMessage}" Width="450" Padding="5,2,5,0" />
+                    <ComboBox ItemsSource="{Binding FeedbackTypes}" SelectedItem="{Binding SelectedFeedbackType}" Width="120" Margin="10 0" />
+                    <CheckBox IsChecked="{Binding IsPermanent}" Content="Permanent" VerticalAlignment="Center" Margin="0,0,10,0" />
+                </StackPanel>
+                <Button Content="Send feedback" Command="{Binding AddFeedbackCommand}" Width="130" Height="28" Padding="10 0" />
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

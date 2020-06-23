@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="CompanyName.ApplicationName.Views.MenuView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ViewModels="clr-namespace:CompanyName.ApplicationName.ViewModels;assembly=CompanyName.ApplicationName.ViewModels">
+    <Menu ItemsSource="{Binding MenuItems}" FontSize="14" Width="500" Height="100">
+        <Menu.ItemContainerStyle>
+            <Style TargetType="{x:Type MenuItem}">
+                <Setter Property="Command" Value="{Binding Command}" />
+            </Style>
+        </Menu.ItemContainerStyle>
+        <Menu.ItemTemplate>
+            <HierarchicalDataTemplate DataType="{x:Type ViewModels:MenuItemViewModel}" ItemsSource="{Binding MenuItems}">
+                <TextBlock Text="{Binding Header}" />
+            </HierarchicalDataTemplate>
+        </Menu.ItemTemplate>
+    </Menu>
+</UserControl>

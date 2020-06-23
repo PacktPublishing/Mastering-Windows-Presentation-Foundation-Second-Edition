@@ -1,0 +1,97 @@
+﻿<Window x:Class="CompanyName.ApplicationName.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:Converters="clr-namespace:CompanyName.ApplicationName.Converters;assembly=CompanyName.ApplicationName.Converters"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Attached="clr-namespace:CompanyName.ApplicationName.Views.Attached;assembly=CompanyName.ApplicationName.Views"
+    Title="Mastering Windows Presentation Foundation - Sheridan Yuen" Width="1250" Height="762" Background="{StaticResource PacktBlack}" ResizeMode="NoResize">
+    <Window.Resources>
+        <Converters:EnumToIntConverter x:Key="EnumToIntConverter" />
+        <LinearGradientBrush x:Key="MenuItemBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="White" Offset="-1" />
+            <GradientStop Color="{StaticResource PacktOrangeColor}" Offset="0.65" />
+            <GradientStop Color="{StaticResource PacktOrangeColor}" Offset="0.75" />
+            <GradientStop Color="{StaticResource PacktBlackColor}" Offset="2" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="SelectedMenuItemBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="White" Offset="-1" />
+            <GradientStop Color="{StaticResource PacktOrangeColor}" Offset="0.05" />
+            <GradientStop Color="{StaticResource PacktOrangeColor}" Offset="0.95" />
+            <GradientStop Color="{StaticResource PacktBlackColor}" Offset="2" />
+        </LinearGradientBrush>
+        <Style x:Key="TitleStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="FontSize" Value="27" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Margin" Value="0,0,0,-7" />
+            <Setter Property="Attached:TextBlockProperties.OnMouseLeftButtonUp" Value="{Binding ShowStartViewCommand}" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid Margin="20,17,20,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock Text="Mastering" FontSize="19.5" FontWeight="Bold" Foreground="{StaticResource PacktOrange}" Attached:TextBlockProperties.OnMouseLeftButtonUp="{Binding ShowStartViewCommand}" Margin="0,0,0,-7" />
+            <TextBlock Grid.Row="1" Text="Windows" Style="{StaticResource TitleStyle}" />
+            <TextBlock Grid.Row="2" Text="Presentation" Style="{StaticResource TitleStyle}" />
+            <TextBlock Grid.Row="3" Text="Foundation" Style="{StaticResource TitleStyle}" />
+            <ListBox Grid.Row="4" ItemsSource="{Binding Pages}" SelectedItem="{Binding ActivePage}" Template="{StaticResource HiddenListBoxTemplate}" HorizontalContentAlignment="Stretch" Margin="0,20,0,0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <RadioButton Content="{Binding Page}" IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}, FallbackValue=False}" VerticalContentAlignment="Center">
+                            <RadioButton.Template>
+                                <ControlTemplate TargetType="{x:Type RadioButton}">
+                                    <Border Name="Border" BorderBrush="White" BorderThickness="2" Background="{StaticResource PacktOrange}" CornerRadius="2">
+                                        <Grid Cursor="Hand">
+                                            <Rectangle Name="LayeredBackground" Fill="{StaticResource LayeredButtonBackground}" Opacity="0.35" />
+                                            <TextBlock Text="{Binding Page, Converter={StaticResource EnumToDescriptionStringConverter}}" Foreground="White" FontWeight="SemiBold" FontSize="14" Margin="5,4.15" />
+                                        </Grid>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}" Value="True">
+                                            <Setter TargetName="Border" Property="BorderBrush" Value="White" />
+                                            <Setter TargetName="Border" Property="Background" Value="{StaticResource PacktBlack}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True">
+                                            <DataTrigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetName="LayeredBackground" Storyboard.TargetProperty="Opacity" To="0.0" Duration="0:0:0.0" DecelerationRatio="1" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </DataTrigger.EnterActions>
+                                            <DataTrigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetName="LayeredBackground" Storyboard.TargetProperty="Opacity" To="0.35" Duration="0:0:0.5" DecelerationRatio="0.5" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </DataTrigger.ExitActions>
+                                        </DataTrigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </RadioButton.Template>
+                        </RadioButton>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+        <Rectangle Grid.Column="1" Fill="White" />
+        <Rectangle Grid.Column="1" Fill="{StaticResource LayeredButtonBackground}" Opacity="0.3" />
+        <ContentControl Grid.Column="1" Content="{Binding ViewModel}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="20,20,16,15">
+            <TextBlock Text="{Binding ActivePage.Chapter, Converter={StaticResource EnumToDescriptionStringConverter}, TargetNullValue=''}" FontFamily="Palatino Linotype" FontStyle="Italic" FontSize="30" Foreground="{StaticResource PacktBlack}" VerticalAlignment="Bottom" />
+            <TextBlock Text="{Binding ActivePage.Chapter, Converter={StaticResource EnumToIntConverter}, TargetNullValue=''}" FontFamily="Symbol" FontSize="100" Foreground="{StaticResource PacktBlack}" Margin="20,0,0,-15" />
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="CompanyName.ApplicationName.Views.ErrorTemplateView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Converters="clr-namespace:CompanyName.ApplicationName.Converters;assembly=CompanyName.ApplicationName.Converters"
+    Width="320" FontSize="14">
+    <Grid Margin="20">
+        <Grid.Resources>
+            <Converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            <Style x:Key="LabelStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="HorizontalAlignment" Value="Right" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="0,0,10,10" />
+            </Style>
+            <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
+                <Setter Property="SnapsToDevicePixels" Value="True" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="0,0,0,10" />
+                <Setter Property="Padding" Value="1.5,2" />
+                <Style.Triggers>
+                    <Trigger Property="Validation.HasError" Value="True">
+                        <Setter Property="ToolTip" Value="{Binding (Validation.Errors).CurrentItem.ErrorContent, RelativeSource={RelativeSource Self}}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <ControlTemplate x:Key="ErrorTemplate">
+                <Border BorderBrush="Red" BorderThickness="2" Background="#1FFF0000" SnapsToDevicePixels="True">
+                    <AdornedElementPlaceholder />
+                </Border>
+            </ControlTemplate>
+            <ToolTip x:Key="ValidationErrorsToolTip">
+                <ItemsControl ItemsSource="{Binding}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding ErrorContent }" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ToolTip>
+            <ControlTemplate x:Key="WarningErrorTemplate">
+                <StackPanel Orientation="Horizontal">
+                    <AdornedElementPlaceholder Margin="0,0,10,0" />
+                    <Image Source="pack://application:,,,/CompanyName.ApplicationName;component/Images/Warning_16.png" Stretch="None" ToolTip="{StaticResource ValidationErrorsToolTip}"  />
+                </StackPanel>
+            </ControlTemplate>
+            <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxStyle}">
+                <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsChecked, ElementName=WarningButton}" Value="True">
+                        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource WarningErrorTemplate}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Name" Style="{StaticResource LabelStyle}" />
+            <TextBox Grid.Column="1" Text="{Binding Product.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+            <TextBlock Grid.Row="1" Text="Price" Style="{StaticResource LabelStyle}" />
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Product.Price, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, Delay=250}" />
+            <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="45,60,0,0">
+                <RadioButton Content="Red border" IsChecked="True" Margin="0,0,20,0" />
+                <RadioButton Name="WarningButton" Content="Warning icon">
+                </RadioButton>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

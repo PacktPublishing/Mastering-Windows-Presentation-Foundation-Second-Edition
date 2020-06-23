@@ -1,0 +1,91 @@
+﻿<UserControl x:Class="CompanyName.ApplicationName.Views.VisuallyAppealingView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:CustomControls="clr-namespace:CompanyName.ApplicationName.CustomControls;assembly=CompanyName.ApplicationName.CustomControls">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Background="White" Width="488" Margin="0,0,120,80">
+            <StackPanel Width="348" Margin="20,30">
+                <TextBlock Name="TextBlock" FontFamily="Candara" Text="APPLICATION NAME" FontSize="40" FontWeight="Bold">
+                    <TextBlock.Foreground>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="Orange" />
+                            <GradientStop Color="Red" Offset="0.5" />
+                            <GradientStop Color="Orange" Offset="1" />
+                        </LinearGradientBrush>
+                    </TextBlock.Foreground>
+                </TextBlock>
+                <Rectangle Height="31" Margin="0,-11.6,0,0">
+                    <Rectangle.Fill>
+                        <VisualBrush Visual="{Binding ElementName=TextBlock}">
+                            <VisualBrush.RelativeTransform>
+                                <ScaleTransform ScaleY="-1.0" CenterX="0.5" CenterY="0.5" />
+                            </VisualBrush.RelativeTransform>
+                        </VisualBrush>
+                    </Rectangle.Fill>
+                    <Rectangle.OpacityMask>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Color="#DF000000" />
+                            <GradientStop Color="Transparent" Offset="0.8" />
+                        </LinearGradientBrush>
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </StackPanel>
+        </StackPanel>
+        <Grid Grid.Column="1" Margin="0,0,0,80" Width="255" Height="120">
+            <Grid.Resources>
+                <LinearGradientBrush x:Key="BackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="White" />
+                    <GradientStop Color="#FFFABF8F" Offset="1.0" />
+                </LinearGradientBrush>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="5*" />
+            </Grid.ColumnDefinitions>
+            <Path Grid.ColumnSpan="2" Fill="{StaticResource BackgroundBrush}" Stroke="#FFEE9C58" StrokeThickness="2" Stretch="Fill">
+                <Path.Data>
+                    <CombinedGeometry GeometryCombineMode="Union">
+                        <CombinedGeometry.Geometry1>
+                            <PathGeometry>
+                                <PathFigure StartPoint="0,60">
+                                    <LineSegment Point="50,45" />
+                                    <LineSegment Point="50,75" />
+                                </PathFigure>
+                            </PathGeometry>
+                        </CombinedGeometry.Geometry1>
+                        <CombinedGeometry.Geometry2>
+                            <RectangleGeometry RadiusX="20" RadiusY="20" Rect="50,0,250,150" />
+                        </CombinedGeometry.Geometry2>
+                    </CombinedGeometry>
+                </Path.Data>
+            </Path>
+            <TextBlock Grid.Column="1" Text="Please fill in the first line of your address." FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" TextWrapping="Wrap" />
+            <Grid.Effect>
+                <DropShadowEffect Color="Black" Direction="270" ShadowDepth="7" Opacity="0.3" />
+            </Grid.Effect>
+        </Grid>
+        <CustomControls:Gauge Grid.Row="1" Width="400" Height="300" MaximumValue="{Binding InCount}" Value="{Binding OutCount}" Title="Support Tickets Cleared" Foreground="White" FontSize="34" Padding="10" Margin="0,0,120,0" />
+        <Grid Grid.Row="1" Grid.Column="1" TextElement.FontSize="28" TextElement.FontWeight="Bold" Width="330">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <CustomControls:Sphere Color="Red" Value="{Binding InCount}" VerticalAlignment="Bottom" />
+            <CustomControls:Sphere Grid.Column="1" Value="{Binding OutCount}" VerticalAlignment="Bottom" />
+            <TextBlock Grid.Row="1" Text="{Binding InCount}" HorizontalAlignment="Center" Margin="0,10,0,0" />
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding OutCount}" HorizontalAlignment="Center" Margin="0,10,0,0" />
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,111 @@
+﻿<UserControl x:Class="CompanyName.ApplicationName.Views.DrawingView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="clr-namespace:CompanyName.ApplicationName.Views.Controls"
+    xmlns:PresentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
+    Width="450" Height="150" ClipToBounds="True">
+    <Grid>
+        <Grid.Resources>
+            <RadialGradientBrush x:Key="RadialBrush" RadiusX="0.8" RadiusY="0.8" PresentationOptions:Freeze="True">
+                <GradientStop Color="Orange" Offset="1.0" />
+                <GradientStop Color="Yellow" />
+            </RadialGradientBrush>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Ellipse Grid.RowSpan="5" Grid.ColumnSpan="5" Fill="{StaticResource RadialBrush}" Stroke="Black" StrokeThickness="5" />
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Ellipse Grid.Column="1" Grid.ColumnSpan="4" Fill="Black" HorizontalAlignment="Stretch" />
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Ellipse Grid.Column="1" Grid.ColumnSpan="4" Fill="Black" HorizontalAlignment="Stretch" />
+            </Grid>
+            <Path Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Stroke="Black" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Data="M0,10 A10,25 0 0 0 12.5,10" Stretch="Fill" />
+        </Grid>
+        <Canvas Grid.Column="1">
+            <Canvas.Background>
+                <DrawingBrush PresentationOptions:Freeze="True">
+                    <DrawingBrush.Drawing>
+                        <DrawingGroup>
+                            <GeometryDrawing Brush="{StaticResource RadialBrush}">
+                                <GeometryDrawing.Geometry>
+                                    <EllipseGeometry Center="50,50" RadiusX="50" RadiusY="50" />
+                                </GeometryDrawing.Geometry>
+                                <GeometryDrawing.Pen>
+                                    <Pen Thickness="3.5" Brush="Black" />
+                                </GeometryDrawing.Pen>
+                            </GeometryDrawing>
+                            <GeometryDrawing Brush="Black">
+                                <GeometryDrawing.Geometry>
+                                    <EllipseGeometry Center="29.5,33" RadiusX="6.75" RadiusY="8.5" />
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                            <GeometryDrawing Brush="Black">
+                                <GeometryDrawing.Geometry>
+                                    <EllipseGeometry Center="70.5,33" RadiusX="6.75" RadiusY="8.5" />
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                            <GeometryDrawing>
+                                <GeometryDrawing.Geometry>
+                                    <PathGeometry>
+                                        <PathGeometry.Figures>
+                                            <PathFigure StartPoint="23,62.5">
+                                                <ArcSegment Point="77,62.5" Size="41 41" />
+                                            </PathFigure>
+                                        </PathGeometry.Figures>
+                                    </PathGeometry>
+                                </GeometryDrawing.Geometry>
+                                <GeometryDrawing.Pen>
+                                    <Pen Thickness="7" Brush="Black" StartLineCap="Round" EndLineCap="Round" />
+                                </GeometryDrawing.Pen>
+                            </GeometryDrawing>
+                        </DrawingGroup>
+                    </DrawingBrush.Drawing>
+                </DrawingBrush>
+            </Canvas.Background>
+        </Canvas>
+        <Canvas Grid.Column="2">
+            <Canvas.Background>
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <Controls:SmileyFaceVisual />
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Canvas.Background>
+        </Canvas>
+    </Grid>
+</UserControl>

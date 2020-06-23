@@ -1,0 +1,315 @@
+﻿<Application x:Class="CompanyName.ApplicationName.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Converters="clr-namespace:CompanyName.ApplicationName.Converters;assembly=CompanyName.ApplicationName.Converters"
+    xmlns:DataModels="clr-namespace:CompanyName.ApplicationName.DataModels;assembly=CompanyName.ApplicationName.DataModels"
+    xmlns:ViewModels="clr-namespace:CompanyName.ApplicationName.ViewModels;assembly=CompanyName.ApplicationName.ViewModels"
+    xmlns:Views="clr-namespace:CompanyName.ApplicationName.Views;assembly=CompanyName.ApplicationName.Views"
+    Startup="App_Startup">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Default Styles.xaml" />
+                <ResourceDictionary Source="Default Styles 2.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/CompanyName.ApplicationName.Resources;component/Styles/Control Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            
+            <!--Common Converters-->
+            <Converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            <Converters:BoolToVisibilityConverter x:Key="InvertedBoolToVisibilityConverter" IsInverted="True" />
+            <Converters:EnumToVisibilityConverter x:Key="InvertedEnumToVisibilityConverter" IsInverted="True" />
+            <Converters:EnumToDescriptionStringConverter x:Key="EnumToDescriptionStringConverter" />
+
+
+            <!--ViewModel Mappings-->
+            <DataTemplate DataType="{x:Type ViewModels:StartViewModel}">
+                <Views:StartView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:BitRateViewModel}">
+                <Views:BitRateView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:DrawingViewModel}">
+                <Views:DrawingView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:MenuViewModel}">
+                <Views:MenuView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:AllProductsViewModel}">
+                <Views:AllProductsView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:ProductViewModel}">
+                <Views:ProductView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:ProductViewModelExtended}">
+                <Views:ProductViewExtended />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:ProductNotifyViewModel}">
+                <Views:ProductNotifyView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:ProductNotifyViewModelExtended}">
+                <Views:ProductNotifyViewExtended />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:ProductNotifyViewModelGeneric}">
+                <Views:ProductNotifyViewGeneric />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:ErrorTemplateViewModel}">
+                <Views:ErrorTemplateView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:UserViewModel}">
+                <Views:UserView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:WeightMeasurementsViewModel}">
+                <Views:WeightMeasurementsView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:ForcedContainerItemsControlViewModel}">
+                <Views:ForcedContainerItemsControlView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:SpreadsheetViewModel}">
+                <Views:SpreadsheetView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:ButtonViewModel}">
+                <Views:ButtonView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:PanelViewModel}">
+                <Views:PanelView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:AdornerViewModel}">
+                <Views:AdornerView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:MeterViewModel}">
+                <Views:MeterView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:AllUsersViewModel}">
+                <Views:AllUsersView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:AnimationViewModel}">
+                <Views:AnimationView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:EasingAnimationViewModel}">
+                <Views:EasingAnimationView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:VisuallyAppealingViewModel}">
+                <Views:VisuallyAppealingView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:FeedbackViewModel}">
+                <Views:FeedbackView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:AnimatedPanelViewModel}">
+                <Views:AnimatedPanelView />
+            </DataTemplate>
+
+            
+            <!--Colors-->
+            <Color x:Key="TransparentWhiteColor">#7FFFFFFF</Color>
+            <Color x:Key="TransparentBlackColor">#7F000000</Color>
+            <Color x:Key="ReadOnlyColor">#FF585858</Color>
+            <Color x:Key="PacktOrangeColor">#FFF36F25</Color>
+            <Color x:Key="PacktBlackColor">#FF34383B</Color>
+            
+            
+            <!--Brushes-->
+            <SolidColorBrush x:Key="TransparentWhite" Color="{StaticResource TransparentWhiteColor}" />
+            <SolidColorBrush x:Key="VeryTransparentWhite" Color="#3FFFFFFF" />
+            <SolidColorBrush x:Key="TransparentBlack" Color="{StaticResource TransparentBlackColor}" />
+            <SolidColorBrush x:Key="VeryTransparentBlack" Color="#3F000000" />
+            <SolidColorBrush x:Key="Brush" Color="Green" />
+            <SolidColorBrush x:Key="PacktOrange" Color="{StaticResource PacktOrangeColor}" />
+            <SolidColorBrush x:Key="PacktBlack" Color="{StaticResource PacktBlackColor}" />
+
+
+            <ControlTemplate x:Key="HiddenListBoxTemplate" TargetType="{x:Type ListBox}">
+                <Border BorderThickness="0" BorderBrush="{x:Null}" SnapsToDevicePixels="True" Background="Transparent">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Focusable="False">
+                        <ItemsPresenter Margin="0" />
+                    </ScrollViewer>
+                </Border>
+            </ControlTemplate>
+            <Style x:Key="DemonstrationLabel" TargetType="{x:Type TextBlock}">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="0,0,0,10" />
+            </Style>
+
+
+            <!--Chapter 1-->
+            <Style x:Key="ImageInButtonStyle" TargetType="{x:Type Image}">
+                <Setter Property="Opacity" Value="1.0" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, FallbackValue=False}" Value="False">
+                        <Setter Property="Opacity" Value="0.5" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+            
+            <!--Chapter 5-->
+            <DataTemplate x:Key="UserTemplate" DataType="{x:Type DataModels:User}">
+                <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Padding="5" Margin="0,0,0,5">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" Margin="0,0,3,0" />
+                        <TextBlock Text="{Binding Age, StringFormat={}({0})}" />
+                    </StackPanel>
+                </Border>
+            </DataTemplate>
+            <DataTemplate x:Key="InverseUserTemplate" DataType="{x:Type DataModels:User}">
+                <Border BorderBrush="White" BorderThickness="1" Background="Black" TextElement.Foreground="White" CornerRadius="5" Padding="8,3,5,5" Margin="0,0,0,5">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" Margin="0,0,3,0" />
+                        <TextBlock Text="{Binding Age, StringFormat={}({0})}" />
+                    </StackPanel>
+                </Border>
+            </DataTemplate>
+            <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
+                <Setter Property="SnapsToDevicePixels" Value="True" />
+                <Setter Property="Margin" Value="0,0,0,5" />
+                <Setter Property="Padding" Value="1.5,2" />
+                <Setter Property="TextWrapping" Value="Wrap" />
+            </Style>
+            <!--<Style x:Key="ReadOnlyTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxStyle}">
+                <Setter Property="IsReadOnly" Value="True" />
+                <Setter Property="Cursor" Value="Arrow" />
+            </Style>-->
+
+
+            <!--Chapter 8-->
+            <RadialGradientBrush x:Key="LayeredButtonBackgroundBrush" RadiusX="1.85" RadiusY="0.796" Center="1.018,-0.115" GradientOrigin="0.65,-0.139">
+                <GradientStop Color="#FFCACACD" />
+                <GradientStop Color="#FF3B3D42" Offset="1" />
+            </RadialGradientBrush>
+            <LinearGradientBrush x:Key="LayeredButtonCurveBrush" StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#FF747475" Offset="0" />
+                <GradientStop Color="#FF3B3D42" Offset="1" />
+            </LinearGradientBrush>
+            <Grid x:Key="LayeredButtonBackgroundElements">
+                <Rectangle Fill="{StaticResource LayeredButtonBackgroundBrush}" />
+                <Path StrokeThickness="0" Fill="{StaticResource LayeredButtonCurveBrush}">
+                    <Path.Data>
+                        <CombinedGeometry GeometryCombineMode="Intersect">
+                            <CombinedGeometry.Geometry1>
+                                <EllipseGeometry Center="-20,50.7" RadiusX="185" RadiusY="46" />
+                            </CombinedGeometry.Geometry1>
+                            <CombinedGeometry.Geometry2>
+                                <RectangleGeometry Rect="0,0,106,24" />
+                            </CombinedGeometry.Geometry2>
+                        </CombinedGeometry>
+                    </Path.Data>
+                </Path>
+            </Grid>
+            <VisualBrush x:Key="LayeredButtonBackground" Visual="{StaticResource LayeredButtonBackgroundElements}" />
+            <VisualBrush x:Key="SemiTransparentLayeredButtonBackground" Visual="{StaticResource LayeredButtonBackgroundElements}" Opacity="0.65" />
+            <Style x:Key="Max2LineTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxStyle}">
+                <Setter Property="MaxHeight" Value="44" />
+                <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+                <Setter Property="ToolTip" Value="{Binding Text, RelativeSource={RelativeSource Self}}" />
+            </Style>
+            <Style x:Key="Max3LineTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource Max2LineTextBoxStyle}">
+                <Setter Property="MaxHeight" Value="64" />
+            </Style>
+            <Style x:Key="ReadOnlyTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxStyle}">
+                <Setter Property="Background" Value="{StaticResource ReadOnlyBrush}" />
+                <Setter Property="IsReadOnly" Value="True" />
+                <Setter Property="Cursor" Value="Arrow" />
+            </Style>
+            <TransformGroup x:Key="GlowTransformGroup">
+                <ScaleTransform CenterX="0.5" CenterY="0.85" ScaleX="1" ScaleY="1.8" />
+                <TranslateTransform Y="0.278" />
+            </TransformGroup>
+            <RadialGradientBrush x:Key="GreenGlow" Center="0.5,0.848" GradientOrigin="0.5,0.818" RadiusX="-1.424" RadiusY="-0.622" RelativeTransform="{StaticResource GlowTransformGroup}">
+                <GradientStop Color="#CF65FF00" Offset="0.168" />
+                <GradientStop Color="#4B65FF00" Offset="0.478" />
+                <GradientStop Color="#0065FF00" Offset="1" />
+            </RadialGradientBrush>
+            <Style x:Key="GlowingButtonStyle" TargetType="{x:Type Button}">
+                <Setter Property="SnapsToDevicePixels" Value="True" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border BorderBrush="White" BorderThickness="1" Background="DarkGray" CornerRadius="3">
+                                <Grid>
+                                    <Rectangle IsHitTestVisible="False" RadiusX="2" RadiusY="2" Fill="{StaticResource GreenGlow}" />
+                                    <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Grid>
+                                <Border.Effect>
+                                    <DropShadowEffect Color="#FF65FF00" ShadowDepth="4" Opacity="0.4" Direction="270" BlurRadius="10" />
+                                </Border.Effect>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+
+            <!--Chapter 9-->
+            <DataTemplate x:Key="WrapTemplate">
+                <TextBlock Text="{Binding}" TextWrapping="Wrap" />
+            </DataTemplate>
+            <RadialGradientBrush x:Key="BlueGlow" Center="0.5,0.848" GradientOrigin="0.5,0.818" RadiusX="-1.424" RadiusY="-0.622" RelativeTransform="{StaticResource GlowTransformGroup}">
+                <GradientStop Color="#CF01C7FF" Offset="0.168" />
+                <GradientStop Color="#4B01C7FF" Offset="0.478" />
+                <GradientStop Color="#1101C7FF" Offset="1" />
+            </RadialGradientBrush>
+            <RadialGradientBrush x:Key="RedGlow" Center="0.5,0.848" GradientOrigin="0.5,0.818" RadiusX="-1.424" RadiusY="-0.622" RelativeTransform="{StaticResource GlowTransformGroup}">
+                <GradientStop Color="#CFFF0000" Offset="0.168" />
+                <GradientStop Color="#4BFF0000" Offset="0.478" />
+                <GradientStop Color="#00FF0000" Offset="1" />
+            </RadialGradientBrush>
+            <Style x:Key="LabelStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="HorizontalAlignment" Value="Right" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="0,0,10,10" />
+            </Style>
+            <Style x:Key="FieldStyle" TargetType="{x:Type TextBox}">
+                <Setter Property="SnapsToDevicePixels" Value="True" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="0,0,0,10" />
+                <Setter Property="Padding" Value="1.5,2" />
+            </Style>
+            <Style x:Key="GlowStyle" TargetType="{x:Type Rectangle}">
+                <Setter Property="SnapsToDevicePixels" Value="True" />
+                <Setter Property="Opacity" Value="1.0" />
+                <Setter Property="StrokeThickness" Value="0" />
+                <Setter Property="RadiusX" Value="2.5" />
+                <Setter Property="RadiusX" Value="2.5" />
+                <Setter Property="IsHitTestVisible" Value="False" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="Fill" Value="{StaticResource BlueGlow}" />
+            </Style>
+            <Style TargetType="{x:Type ListBoxItem}">
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="Margin" Value="2,2,2,0" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                            <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding   Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                                <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+
+            <!--Chapter 10-->
+            <Style x:Key="SmallImageInButtonStyle" TargetType="{x:Type Image}" BasedOn="{StaticResource ImageInButtonStyle}">
+                <Setter Property="Width" Value="16" />
+                <Setter Property="Height" Value="16" />
+            </Style>
+            <Style x:Key="FocusableTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxStyle}">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsFocused}" Value="True">
+                        <Setter Property="FocusManager.FocusedElement" Value="{Binding RelativeSource={RelativeSource Self}}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
