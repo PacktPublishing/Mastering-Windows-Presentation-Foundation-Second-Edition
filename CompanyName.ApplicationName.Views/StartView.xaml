@@ -1,0 +1,7 @@
+﻿<UserControl x:Class="CompanyName.ApplicationName.Views.StartView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Image Source="pack://application:,,,/CompanyName.ApplicationName;component/Images/Cover.png" Width="540" Stretch="Uniform" />
+    </Grid>
+</UserControl>

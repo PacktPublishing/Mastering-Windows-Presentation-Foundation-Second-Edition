@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="CompanyName.ApplicationName.Views.ForcedContainerItemsControlView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="clr-namespace:CompanyName.ApplicationName.Views.Controls"
+    Height="175" Width="287">
+    <Grid Background="White">
+        <Grid.Resources>
+            <DataTemplate x:Key="EllipseDataTemplate" DataType="{x:Type UIElement}">
+                <Ellipse Width="16" Height="16" Stroke="Gray" StrokeThickness="2" Margin="4">
+                    <Ellipse.Style>
+                        <Style TargetType="{x:Type Ellipse}">
+                            <Setter Property="Fill" Value="Transparent" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}" Value="True">
+                                    <Setter Property="Fill" Value="LightGray" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Ellipse.Style>
+                </Ellipse>
+            </DataTemplate>
+            <ItemsPanelTemplate x:Key="HorizontalPanelTemplate">
+                <StackPanel Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+            <Style TargetType="{x:Type Rectangle}">
+                <Setter Property="Width" Value="75" />
+                <Setter Property="Height" Value="75" />
+                <Setter Property="RadiusX" Value="15" />
+                <Setter Property="RadiusY" Value="15" />
+            </Style>
+            <Style x:Key="HiddenListBoxItems" TargetType="{x:Type ListBoxItem}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                            <ContentPresenter />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="HiddenListBox" TargetType="{x:Type ListBox}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ListBox}">
+                            <ScrollViewer>
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </ScrollViewer>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <ListBox Name="ListBox" Height="105" Margin="20,20,20,0" ItemsPanel="{StaticResource HorizontalPanelTemplate}">
+            <Rectangle Fill="Red" />
+            <Rectangle Fill="Orange" />
+            <Rectangle Fill="Green" />
+        </ListBox>
+        <!--<ItemsControl Grid.Row="1" ItemsSource="{Binding Items, ElementName=ListBox}" ItemsPanel="{StaticResource HorizontalPanelTemplate}" ItemTemplate="{StaticResource EllipseDataTemplate}" HorizontalAlignment="Center" />-->
+        <!--<Controls:ForcedContainerItemsControl Grid.Row="1" ItemsSource="{Binding Items, ElementName=ListBox}" ItemsPanel="{StaticResource HorizontalPanelTemplate}" ItemTemplate="{StaticResource EllipseDataTemplate}" HorizontalAlignment="Center" Height="32" />-->
+        <ListBox Grid.Row="1" ItemsSource="{Binding Items, ElementName=ListBox}" ItemsPanel="{StaticResource HorizontalPanelTemplate}" ItemTemplate="{StaticResource EllipseDataTemplate}" SelectedItem="{Binding SelectedItem, ElementName=ListBox}" Style="{StaticResource HiddenListBox}" ItemContainerStyle="{StaticResource HiddenListBoxItems}" HorizontalAlignment="Center" />
+    </Grid>
+</UserControl>

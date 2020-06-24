@@ -1,0 +1,155 @@
+﻿<UserControl x:Class="CompanyName.ApplicationName.Views.PanelView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Panels="clr-namespace:CompanyName.ApplicationName.Views.Panels" Width="1000" Height="650">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="20">
+            <TextBlock Text="Canvas" Style="{StaticResource DemonstrationLabel}" Margin="0,0,0,75" />
+            <Canvas Width="256" Height="109" Background="Black">
+                <Canvas.Resources>
+                    <Style TargetType="{x:Type Ellipse}">
+                        <Setter Property="Width" Value="50" />
+                        <Setter Property="Height" Value="50" />
+                        <Setter Property="Stroke" Value="Black" />
+                        <Setter Property="StrokeThickness" Value="3" />
+                    </Style>
+                </Canvas.Resources>
+                <Canvas Canvas.Left="3" Canvas.Top="3" Background="Orange" Width="123.5" Height="50">
+                    <Ellipse Canvas.Top="25" Canvas.Left="25" Fill="Cyan" />
+                </Canvas>
+                <Canvas Canvas.Left="129.5" Canvas.Top="3" Background="Orange" Width="123.5" Height="50" Panel.ZIndex="1" />
+                <Canvas Canvas.Left="3" Canvas.Top="56" Background="Red" Width="250" Height="50" ClipToBounds="True">
+                    <Ellipse Canvas.Top="-25" Canvas.Left="175" Fill="Lime" />
+                </Canvas>
+                <Ellipse Canvas.Top="29.5" Canvas.Left="103" Fill="Yellow" />
+            </Canvas>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="1" Margin="20">
+            <TextBlock Text="Dock Panel" Style="{StaticResource DemonstrationLabel}" Margin="0,0,0,40" />
+            <DockPanel Width="290" Height="180">
+                <DockPanel.Resources>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                        <Setter Property="FontSize" Value="14" />
+                    </Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="BorderBrush" Value="Black" />
+                        <Setter Property="BorderThickness" Value="1" />
+                    </Style>
+                </DockPanel.Resources>
+                <Border Padding="0,3" DockPanel.Dock="Top">
+                    <TextBlock Text="Menu Bar" />
+                </Border>
+                <Border Padding="0,3" DockPanel.Dock="Bottom">
+                    <TextBlock Text="Status Bar" />
+                </Border>
+                <Border Width="100" DockPanel.Dock="Left">
+                    <TextBlock Text="Context Menu" TextWrapping="Wrap" />
+                </Border>
+                <Border>
+                    <TextBlock Text="View" />
+                </Border>
+            </DockPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="2" Margin="20">
+            <TextBlock Text="Stack Panel" Style="{StaticResource DemonstrationLabel}" />
+            <Border Background="Black" Padding="5">
+                <Border.Resources>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Padding" Value="5" />
+                        <Setter Property="Background" Value="Yellow" />
+                        <Setter Property="TextAlignment" Value="Center" />
+                    </Style>
+                </Border.Resources>
+                <StackPanel TextElement.FontSize="14">
+                    <TextBlock Text="Stretched Horizontally" />
+                    <TextBlock Text="With Margin" Margin="20" />
+                    <TextBlock Text="Centered&#x000A;Horizontally" HorizontalAlignment="Center" />
+                    <Border BorderBrush="Cyan" BorderThickness="1" Margin="0,5,0,0" Padding="5" SnapsToDevicePixels="True">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Stretched&#x000A;Vertically" />
+                            <TextBlock Text="With Margin" Margin="20" />
+                            <TextBlock Text="Centered&#x000A;Vertically" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Margin="20">
+            <TextBlock Text="Uniform Grid" Style="{StaticResource DemonstrationLabel}" />
+            <StackPanel TextElement.FontSize="14" Background="White">
+                <UniformGrid Columns="7" Rows="1">
+                    <UniformGrid.Resources>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Height" Value="35" />
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="Padding" Value="0,5,0,0" />
+                        </Style>
+                    </UniformGrid.Resources>
+                    <TextBlock Text="Mon" />
+                    <TextBlock Text="Tue" />
+                    <TextBlock Text="Wed" />
+                    <TextBlock Text="Thu" />
+                    <TextBlock Text="Fri" />
+                    <TextBlock Text="Sat" />
+                    <TextBlock Text="Sun" />
+                </UniformGrid>
+                <ItemsControl ItemsSource="{Binding Days}" Background="Black" Padding="0,0,1,1">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="7" FirstColumn="2" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Black" BorderThickness="1,1,0,0" Background="White">
+                                <TextBlock Text="{Binding}" Height="35" HorizontalAlignment="Center" Padding="0,7.5,0,0" />
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="20">
+            <TextBlock Text="Wrap Panel" Style="{StaticResource DemonstrationLabel}" Margin="0,0,0,20" />
+            <WrapPanel ItemHeight="50" Width="150" TextElement.FontSize="14">
+                <WrapPanel.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Width" Value="50" />
+                    </Style>
+                </WrapPanel.Resources>
+                <Button Content="7" />
+                <Button Content="8" />
+                <Button Content="9" />
+                <Button Content="4" />
+                <Button Content="5" />
+                <Button Content="6" />
+                <Button Content="1" />
+                <Button Content="2" />
+                <Button Content="3" />
+                <Button Content="0" Width="100" />
+                <Button Content="." />
+            </WrapPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="2" Margin="20">
+            <TextBlock Text="Circumference Panel" Style="{StaticResource DemonstrationLabel}" Margin="0,0,0,20" />
+            <ItemsControl ItemsSource="{Binding Hours}" Width="200" Height="200" TextElement.FontSize="24">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Panels:CircumferencePanel Padding="15" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </StackPanel>
+    </Grid>
+</UserControl>

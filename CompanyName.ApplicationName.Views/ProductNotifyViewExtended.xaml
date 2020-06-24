@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="CompanyName.ApplicationName.Views.ProductNotifyViewExtended"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Attached="clr-namespace:CompanyName.ApplicationName.Views.Attached"
+    Width="600" FontSize="14">
+    <Grid Margin="20">
+        <Grid.Resources>
+            <DataTemplate x:Key="ProductTemplate">
+                <TextBlock Text="{Binding Name, ValidatesOnNotifyDataErrors=False}" />
+            </DataTemplate>
+            <!--This Style just overrides the default Style from App.xaml-->
+            <Style TargetType="{x:Type ListBoxItem}" />
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <ListBox ItemsSource="{Binding Products}" SelectedItem="{Binding Products.CurrentItem}" ItemTemplate="{StaticResource ProductTemplate}" Margin="0,0,20,0" />
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Border Grid.ColumnSpan="2" BorderBrush="Red" BorderThickness="2" Background="#1FFF0000" CornerRadius="5" Visibility="{Binding Products.CurrentItem.HasErrors, Converter={StaticResource BoolToVisibilityConverter}}" Margin="0,0,0,10" Padding="10">
+                <ItemsControl ItemsSource="{Binding Products.CurrentItem.Errors}" ItemTemplate="{StaticResource WrapTemplate}" />
+            </Border>
+            <TextBlock Grid.Row="1" Text="Name" Style="{StaticResource LabelStyle}" />
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Products.CurrentItem.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" Style="{StaticResource FieldStyle}" />
+            <TextBlock Grid.Row="2" Text="Price" Style="{StaticResource LabelStyle}" />
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Products.CurrentItem.Price, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, Delay=250}" Style="{StaticResource FieldStyle}" Attached:TextBoxProperties.IsNumericOnly="True" />
+        </Grid>
+    </Grid>
+</UserControl>
